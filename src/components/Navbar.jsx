@@ -14,7 +14,6 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // Check if user is an instructor
   const isInstructor = user?.user?.role === 'instructor' || user?.user?.role === 'admin';
 
   return (
@@ -31,22 +30,19 @@ const Navbar = () => {
 
           {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center space-x-8">
+            <Link to="/" className="text-[#6B6B6B] hover:text-[#1C1C1C] font-medium transition-colors">
+              Home
+            </Link>
             {user && (
               <Link to="/my-learning" className="text-[#6B6B6B] hover:text-[#1C1C1C] font-medium transition-colors">
                 My Learning
               </Link>
             )}
-            
-            {/* Smart Link: Shows Dashboard for instructors, Teach for students */}
             {user && (
-              <Link 
-                to={isInstructor ? "/instructor/dashboard" : "/become-instructor"} 
-                className="text-[#6B6B6B] hover:text-[#1C1C1C] font-medium transition-colors"
-              >
+              <Link to={isInstructor ? "/instructor/dashboard" : "/become-instructor"} className="text-[#6B6B6B] hover:text-[#1C1C1C] font-medium transition-colors">
                 {isInstructor ? 'Dashboard' : 'Teach'}
               </Link>
             )}
-            
             <Link to="/courses" className="text-[#6B6B6B] hover:text-[#1C1C1C] font-medium transition-colors">
               Courses
             </Link>
@@ -59,10 +55,7 @@ const Navbar = () => {
                 <span className="text-[#1C1C1C] font-medium border-l border-[#EAE6DF] pl-6">
                   Hi, {user.user?.name?.split(' ')[0]}
                 </span>
-                <button 
-                  onClick={handleLogout} 
-                  className="bg-white border border-[#EAE6DF] text-[#1C1C1C] px-6 py-2.5 rounded-full font-medium hover:bg-gray-50 transition-all shadow-sm"
-                >
+                <button onClick={handleLogout} className="bg-white border border-[#EAE6DF] text-[#1C1C1C] px-6 py-2.5 rounded-full font-medium hover:bg-gray-50 transition-all shadow-sm">
                   Logout
                 </button>
               </>
@@ -87,10 +80,7 @@ const Navbar = () => {
             )}
             
             {user ? (
-              <button 
-                onClick={handleLogout} 
-                className="text-xs bg-white border border-[#EAE6DF] text-[#1C1C1C] px-3 py-1.5 rounded-full font-medium shadow-sm hover:bg-gray-50"
-              >
+              <button onClick={handleLogout} className="text-xs bg-white border border-[#EAE6DF] text-[#1C1C1C] px-3 py-1.5 rounded-full font-medium shadow-sm hover:bg-gray-50">
                 Logout
               </button>
             ) : (
@@ -99,10 +89,7 @@ const Navbar = () => {
               </Link>
             )}
             
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
-              className="w-9 h-9 flex items-center justify-center bg-white border border-[#EAE6DF] rounded-full text-[#1C1C1C] shadow-sm ml-1"
-            >
+            <button onClick={() => setIsOpen(!isOpen)} className="w-9 h-9 flex items-center justify-center bg-white border border-[#EAE6DF] rounded-full text-[#1C1C1C] shadow-sm ml-1">
               {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
@@ -114,39 +101,23 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden bg-white border-b border-[#EAE6DF] shadow-xl absolute w-full left-0">
           <div className="px-6 py-6 flex flex-col space-y-4">
+            <Link to="/" onClick={() => setIsOpen(false)} className="text-[#1C1C1C] font-medium text-lg">
+              Home
+            </Link>
             {user && (
-              <Link 
-                to="/my-learning" 
-                onClick={() => setIsOpen(false)} 
-                className="text-[#1C1C1C] font-medium text-lg"
-              >
+              <Link to="/my-learning" onClick={() => setIsOpen(false)} className="text-[#1C1C1C] font-medium text-lg">
                 My Learning
               </Link>
             )}
-            
-            {/* Smart Link for Mobile */}
             {user && (
-              <Link 
-                to={isInstructor ? "/instructor/dashboard" : "/become-instructor"} 
-                onClick={() => setIsOpen(false)} 
-                className="text-[#1C1C1C] font-medium text-lg"
-              >
+              <Link to={isInstructor ? "/instructor/dashboard" : "/become-instructor"} onClick={() => setIsOpen(false)} className="text-[#1C1C1C] font-medium text-lg">
                 {isInstructor ? 'Dashboard' : 'Teach'}
               </Link>
             )}
-
-            <Link 
-              to="/courses" 
-              onClick={() => setIsOpen(false)} 
-              className="text-[#1C1C1C] font-medium text-lg"
-            >
+            <Link to="/courses" onClick={() => setIsOpen(false)} className="text-[#1C1C1C] font-medium text-lg">
               Courses
             </Link>
-            <Link 
-              to="/about" 
-              onClick={() => setIsOpen(false)} 
-              className="text-[#1C1C1C] font-medium text-lg"
-            >
+            <Link to="/about" onClick={() => setIsOpen(false)} className="text-[#1C1C1C] font-medium text-lg">
               About
             </Link>
           </div>

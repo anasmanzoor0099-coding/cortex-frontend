@@ -57,7 +57,7 @@ const Home = () => {
       >
         <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-[#EAE6DF]">
           <div>
-            <p className="text-4xl font-serif font-bold text-[#1C1C1C] mb-1">6</p>
+            <p className="text-4xl font-serif font-bold text-[#1C1C1C] mb-1">10</p>
             <p className="text-sm text-[#6B6B6B]">Focused courses</p>
           </div>
           <div>
@@ -95,7 +95,7 @@ const Home = () => {
               
               <div className="flex items-center justify-center md:justify-start gap-8 border-t border-gray-700 pt-6">
                 <div>
-                  <p className="text-2xl font-serif text-white">6</p>
+                  <p className="text-2xl font-serif text-white">10</p>
                   <p className="text-xs text-gray-500">courses</p>
                 </div>
                 <div>
