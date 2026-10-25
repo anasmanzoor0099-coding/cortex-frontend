@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cortex-bg text-cortex-text font-sans antialiased overflow-x-hidden w-full;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif text-cortex-text;
+  }
+}
+
+/* Custom Scrollbar for a soft look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FDFBF7; 
+}
+::-webkit-scrollbar-thumb {
+  background: #FFD166; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF8C42; 
+}
