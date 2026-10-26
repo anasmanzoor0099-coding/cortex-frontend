@@ -1,8 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import MobileTopHeader from './components/MobileTopHeader'; // Naya Mobile Header
+import MobileNav from './components/MobileNav'; // Naya Mobile Bottom Bar
 import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop'; // <-- Naya Import
+import ScrollToTop from './components/ScrollToTop';
 
 // Pages
 import Home from './pages/Home';
@@ -21,11 +23,20 @@ import Contact from './pages/Contact';
 function App() {
   return (
     <Router>
-      <ScrollToTop /> {/* <-- Yeh add karna zaroori hai */}
+      <ScrollToTop />
       
-      <div className="flex flex-col min-h-screen bg-[#FDFBF7]">
-        <Navbar />
-        <main className="flex-grow">
+      {/* pb-20 mobile par bottom bar ke liye jagah banata hai, desktop par pb-0 ho jata hai */}
+      <div className="flex flex-col min-h-screen bg-[#FDFBF7] pb-20 md:pb-0">
+        
+        {/* --- HEADERS --- */}
+        <div className="hidden md:block">
+          <Navbar /> {/* Desktop Menu */}
+        </div>
+        <MobileTopHeader /> {/* Mobile Top Logo */}
+
+        {/* --- MAIN CONTENT --- */}
+        {/* pt-16 mobile top header ke liye, md:pt-20 desktop navbar ke liye */}
+        <main className="flex-grow pt-16 md:pt-20">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
@@ -41,7 +52,15 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
-        <Footer />
+        
+        {/* --- FOOTER (Desktop only) --- */}
+        <div className="hidden md:block">
+          <Footer />
+        </div>
+
+        {/* --- MOBILE BOTTOM NAV --- */}
+        <MobileNav />
+        
       </div>
     </Router>
   );
