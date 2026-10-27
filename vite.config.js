@@ -13,6 +13,7 @@ export default defineConfig({
   name: 'Cortex Learning',
   short_name: 'Cortex',
   description: 'Learn deeply. Build boldly.',
+  start_url: '/' ,
   theme_color: '#FDFBF7',
   background_color: '#FDFBF7',
   display: 'standalone',
