@@ -8,17 +8,19 @@ export default {
     extend: {
       colors: {
         cortex: {
-          bg: '#FDFBF7',       // Very soft cream background
-          card: '#FFFFFF',     // Pure white for cards
-          text: '#1C1C1C',     // Almost black (easier on eyes than pure #000)
-          muted: '#6B6B6B',    // Soft gray for paragraphs
-          orange: '#FF8C42',   // Light Orange (primary accent)
-          yellow: '#FFD166',   // Soft Yellow (secondary accent)
-          border: '#EAE6DF',   // Light border color
+          bg: '#F8F7F2',       // Pearl White background
+          ivory: '#FDFCF8',    // Soft Ivory elevated surface
+          card: '#FDFCF8',     // Soft Ivory for cards
+          text: '#17231E',     // Deep Forest Primary Text
+          muted: '#737A75',    // Muted Sage Text
+          emerald: '#064E3B',  // Deep Emerald (primary accent)
+          forest: '#0B3D2E',   // Forest Green (rich dark/hover)
+          jade: '#10B981',     // Jade (interactive highlight)
+          gold: '#D6B56D',     // Champagne Gold (luxury accent)
+          border: '#DCE4DF',   // Refined emerald-tinted border
         }
       },
       fontFamily: {
-        // We will use a premium serif for headings and clean sans for text
         serif: ['"Playfair Display"', 'serif'],
         sans: ['"Inter"', 'sans-serif'],
       }

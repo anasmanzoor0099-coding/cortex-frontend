@@ -1,46 +1,112 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
-// Create the box
 export const AuthContext = createContext();
 
-// Create the provider that wraps the app
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // This is the address of our backend
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-  // When the website loads, check if the user is already logged in
-  useEffect(() => {
-    const storedUser = localStorage.getItem('cortexUser');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setLoading(false);
+  const logout = useCallback(() => {
+    localStorage.removeItem('cortexUser');
+    setUser(null);
   }, []);
 
-  // Login function
+  useEffect(() => {
+    const initAuth = async () => {
+      const stored = localStorage.getItem('cortexUser');
+      if (!stored) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(stored);
+        if (!parsed?.token) {
+          logout();
+          setLoading(false);
+          return;
+        }
+        setUser(parsed);
+
+        // Sync fresh user role/profile from backend
+        const res = await axios.get(`${API_URL}/api/auth/me`, {
+          headers: { Authorization: `Bearer ${parsed.token}` },
+          timeout: 8000,
+        });
+        const synced = { ...parsed, user: res.data.user };
+        localStorage.setItem('cortexUser', JSON.stringify(synced));
+        setUser(synced);
+      } catch (err) {
+        if (err.response?.status === 401) {
+          logout();
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initAuth();
+  }, [API_URL, logout]);
+
+  const setAuthSession = useCallback((sessionData) => {
+    localStorage.setItem('cortexUser', JSON.stringify(sessionData));
+    setUser(sessionData);
+  }, []);
+
+  const updateUserProfile = useCallback((updatedUser) => {
+    setUser((prev) => {
+      if (!prev) return prev;
+      const next = { ...prev, user: { ...prev.user, ...updatedUser } };
+      localStorage.setItem('cortexUser', JSON.stringify(next));
+      return next;
+    });
+  }, []);
+
   const login = async (email, password) => {
     try {
       const res = await axios.post(`${API_URL}/api/auth/login`, { email, password });
-      localStorage.setItem('cortexUser', JSON.stringify(res.data));
-      setUser(res.data);
+      setAuthSession(res.data);
       return { success: true };
     } catch (error) {
-      return { success: false, message: error.response?.data?.message || 'Login failed' };
+      if (!error.response) {
+        return {
+          success: false,
+          message: 'Unable to reach the server. Please check your connection and try again.',
+        };
+      }
+      if (error.response.status >= 500) {
+        return {
+          success: false,
+          message: error.response.data?.message || 'Server error during login. Please try again later.',
+        };
+      }
+      return {
+        success: false,
+        message: error.response.data?.message || 'Login failed. Please check your credentials.',
+      };
     }
   };
 
-  // Logout function
-  const logout = () => {
-    localStorage.removeItem('cortexUser');
-    setUser(null);
-  };
+  const isInstructorOrAdmin =
+    user?.user?.role === 'instructor' || user?.user?.role === 'admin';
 
   return (
-    <AuthContext.Provider value={{ user, setUser, login, logout, loading, API_URL }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        setAuthSession,
+        updateUserProfile,
+        login,
+        logout,
+        loading,
+        API_URL,
+        isInstructorOrAdmin,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

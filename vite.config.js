@@ -14,8 +14,8 @@ export default defineConfig({
   short_name: 'Cortex',
   description: 'Learn deeply. Build boldly.',
   start_url: '/' ,
-  theme_color: '#FDFBF7',
-  background_color: '#FDFBF7',
+  theme_color: '#F8F7F2',
+  background_color: '#F8F7F2',
   display: 'standalone',
   // Yahan purpose: 'any' add karna zaroori hai
   icons: [
@@ -48,6 +48,21 @@ export default defineConfig({
 }
     })
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          motion: ['framer-motion'],
+        },
+      },
+    },
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './src/tests/setup.js',
+  },
   server: {
     port: 5173,
   },
