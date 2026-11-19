@@ -1,52 +1,56 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { VitePWA } from 'vite-plugin-pwa'; // <-- Import kiya
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
-      
-    manifest: {
-  name: 'Cortex Learning',
-  short_name: 'Cortex',
-  description: 'Learn deeply. Build boldly.',
-  start_url: '/' ,
-  theme_color: '#F8F7F2',
-  background_color: '#F8F7F2',
-  display: 'standalone',
-  // Yahan purpose: 'any' add karna zaroori hai
-  icons: [
-    {
-      src: 'pwa-192x192.png',
-      sizes: '192x192',
-      type: 'image/png',
-      purpose: 'any' 
-    },
-    {
-      src: 'pwa-512x512.png',
-      sizes: '512x512',
-      type: 'image/png',
-      purpose: 'any' 
-    },
-    // Maskable icons (Android ke liye behtar look)
-    {
-      src: 'pwa-192x192.png',
-      sizes: '192x192',
-      type: 'image/png',
-      purpose: 'maskable'
-    },
-    {
-      src: 'pwa-512x512.png',
-      sizes: '512x512',
-      type: 'image/png',
-      purpose: 'maskable'
-    }
-  ]
-}
-    })
+      includeAssets: [
+        'favicon.ico',
+        'favicon.svg',
+        'favicon-16x16.png',
+        'favicon-32x32.png',
+        'apple-touch-icon.png',
+        'masked-icon.svg',
+      ],
+      manifest: {
+        name: 'Cortex Learning',
+        short_name: 'Cortex',
+        description: 'Learn deeply. Build boldly.',
+        start_url: '/',
+        theme_color: '#F8F7F2',
+        background_color: '#F8F7F2',
+        display: 'standalone',
+        icons: [
+          {
+            src: 'pwa-192x192-v2.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'pwa-512x512-v2.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'pwa-192x192-v2.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: 'pwa-512x512-v2.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
+      },
+    }),
   ],
   build: {
     rollupOptions: {
@@ -59,11 +63,8 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'jsdom',
     globals: true,
+    environment: 'jsdom',
     setupFiles: './src/tests/setup.js',
-  },
-  server: {
-    port: 5173,
   },
 });

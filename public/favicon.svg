@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="emeraldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064E3B" />
+      <stop offset="65%" stop-color="#0B3D2E" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+    <radialGradient id="jadeGlow" cx="25%" cy="20%" r="65%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.28" />
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#emeraldGrad)" />
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#jadeGlow)" />
+  <rect x="3.5" y="3.5" width="57" height="57" rx="12.5" fill="none" stroke="#D6B56D" stroke-opacity="0.65" stroke-width="1.5" />
+  <path
+    d="M39.5 22.8 C36.9 20.1 33.4 18.8 29.3 18.8 C21.2 18.8 15.8 24.4 15.8 32.1 C15.8 39.8 21.2 45.2 29.3 45.2 C33.5 45.2 37.1 43.8 39.7 41"
+    fill="none"
+    stroke="#F8F7F2"
+    stroke-width="6.2"
+    stroke-linecap="round"
+  />
+  <circle cx="45.5" cy="42.5" r="3.8" fill="#D6B56D" />
+</svg>
